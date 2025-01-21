@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "typescript": "^5",
+    "@next/swc-wasm-nodejs": "^15.1.5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

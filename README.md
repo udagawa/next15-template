@@ -24,5 +24,5 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Warning(bolt.diy)
 
-next dev --turbopack は wasm では動かない。
-Nextjs 15 + Tailwind の Template のままだと Firefox 134.0.1 だと js でエラーになり。 Chrome なら動いた。
+next dev --turbopack does not work with WASM.
+Using the default template of Next.js 15 + Tailwind causes a JavaScript error in Firefox 134.0.1, while it works fine in Chrome.

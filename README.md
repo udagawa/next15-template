@@ -14,7 +14,9 @@ pnpm dev
 bun dev
 ```
 
-```bolt.diy
+run the bolt.diy:
+
+```bash
 npm install && npm run dev
 ```
 

@@ -9,4 +9,6 @@ By default, this template supports JSX syntax with Tailwind CSS classes, React h
 SQLite must always be handled server-side. Do not use sql.js.
 The SQLite instance can be accessed via openDB in lib/db.ts. You do not need to modify this file.
 To add, modify, or delete tables in the database, update the initDB function in lib/db-init.ts.
+
 For CRUD operations on a specific table, create corresponding files under lib/<table-name>.ts wherever possible.
+Please implement it as a nextjs server action by starting the file lib/<table-name>.ts with "use server";.

@@ -1,17 +1,23 @@
-For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+For all designs I request, prioritize beauty and originality over cookie-cutter solutions. Create fully featured, production-ready webpages.
 
-When using client-side hooks (useState and useEffect) in a component that's being treated as a Server Component by Next.js, always add the `"use client"` directive at the top of the file.
-Use userParams() to receive parameters in the client component.
+**Crucially, avoid generating code that triggers the following error:** "Warning: Extra attributes from the server: %s%s""class,style"
 
-Do not write code that will trigger this error: "Warning: Extra attributes from the server: %s%s""class,style"
+This template supports JSX syntax with Tailwind CSS classes, React hooks, and react-icons by default. Do not introduce additional UI theme or icon packages unless explicitly requested or absolutely essential.
 
-By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and react-icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+**Next.js Server Components and Client-Side Hooks:**
 
-SQLite must always be handled server-side. Do not use sql.js.
-The SQLite instance can be accessed via openDB in `lib/db.ts`. You do not need to modify this file.
-To add, modify, or delete tables in the database, update the initDB function in `lib/db-init.ts`.
+When using client-side hooks (e.g., `useState`, `useEffect`, `useParams`) within a component treated as a Server Component by Next.js, **always** include the `"use client"` directive at the top of the file. Use `const params = useParams();` to receive parameters in the client component.
 
-For CRUD operations on a specific table, create corresponding files under `lib/<table-name>.ts`.
-`lib/<table-name>.ts` files must begin with `"use server";`
-`lib/<table-name>.ts` files are server action.
-In the server action, no return value is needed except for getXxx, which is used to get data after updating the db.
+**SQLite Database Interaction:**
+
+All SQLite database operations **must** be handled server-side. Do **not** use the `sql.js` library.
+
+- The SQLite instance is accessible via `openDB` in `lib/db.ts`. **Do not modify this file.**
+- To create, modify, or delete database tables, update the `initDB` function in `lib/db-init.ts`.
+
+**CRUD Operations:**
+
+For CRUD (Create, Read, Update, Delete, Select) operations on a specific table, create corresponding files under `lib/$table.ts`.
+
+- `$table.ts` files **must** include the `"use server"` directive at the top.
+- Server actions in `$table.ts` **do not** need to return a value, _except_ for `getXxx` functions. `getXxx` functions are used to retrieve data _after_ a database update. All other CRUD operations should not return anything.

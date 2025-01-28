@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { initDB } from "@/lib/db-init";
+
+await initDB();
 
 export const metadata: Metadata = {
   title: "Create Next App",

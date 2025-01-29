@@ -6,14 +6,18 @@ export async function initDB() {
   if (databaseInitialized) {
     return;
   }
+  let db = null;
   try {
-    const db = await openDB();
+    db = await openDB();
 
     // TODO: setup db
 
-    await db.close();
-    databaseInitialized = true;
   } catch (error) {
     console.error('Failed to initialize database:', error);
+  } finally {
+    if (db) {
+      await db.close();
+      databaseInitialized = true;
+    }
   }
 }

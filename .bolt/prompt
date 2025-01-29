@@ -7,6 +7,7 @@ This template supports JSX syntax with Tailwind CSS classes, React hooks, and re
 **Next.js Server Components and Client-Side Hooks:**
 
 When using client-side hooks (e.g., `useState`, `useEffect`, `useParams`) within a component treated as a Server Component by Next.js, **always** include the `"use client"` directive at the top of the file. Use `const params = useParams();` to receive parameters in the client component.
+Does not use useRouter.
 
 **SQLite Database Interaction:**
 
@@ -21,3 +22,4 @@ For CRUD (Create, Read, Update, Delete, Select) operations on a specific table, 
 
 - `$table.ts` files **must** include the `"use server"` directive at the top.
 - Server actions in `$table.ts` **do not** need to return a value, _except_ for `getXxx` functions. `getXxx` functions are used to retrieve data _after_ a database update. All other CRUD operations should not return anything.
+- Ensure that when calling openDb(), it is always closed in the finally block. Additionally, if an error occurs, log the error to the console

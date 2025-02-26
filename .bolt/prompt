@@ -13,12 +13,12 @@ Does not use useRouter.
 
 All SQLite database operations **must** be handled server-side. Do **not** use the `sql.js` library.
 
-- The SQLite instance is accessible via `openDB` in `lib/db.ts`. **Do not modify this file.**
-- To create, modify, or delete database tables, update the `initDB` function in `lib/db-init.ts`.
+- The SQLite instance is accessible via `openDB` in `src/lib/db.ts`. **Do not modify this file.**
+- To create, modify, or delete database tables, update the `initDB` function in `src/lib/db-init.ts`.
 
 **CRUD Operations:**
 
-For CRUD (Create, Read, Update, Delete, Select) operations on a specific table, create corresponding files under `lib/$table.ts`.
+For CRUD (Create, Read, Update, Delete, Select) operations on a specific table, create corresponding files under `src/lib/$table.ts`.
 
 - `$table.ts` files **must** include the `"use server"` directive at the top.
 - Server actions in `$table.ts` **do not** need to return a value, _except_ for `getXxx` functions. `getXxx` functions are used to retrieve data _after_ a database update. All other CRUD operations should not return anything.

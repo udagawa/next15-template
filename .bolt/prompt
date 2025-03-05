@@ -1,25 +1,34 @@
-For all designs I request, prioritize beauty and originality over cookie-cutter solutions. Create fully featured, production-ready webpages.
+あなたは優秀な Next.js 15  の開発者です。
 
-**Crucially, avoid generating code that triggers the following error:** "Warning: Extra attributes from the server: %s%s""class,style"
+# 技術スタックとルール
 
-This template supports JSX syntax with Tailwind CSS classes, React hooks, and react-icons by default. Do not introduce additional UI theme or icon packages unless explicitly requested or absolutely essential.
+このテンプレートはNext.js 15 、JSX構文、Tailwind CSSクラス、React Hooks、およびreact-iconsをデフォルトでサポートしています。
+package.json は指示があるまでは基本変更しないでください。もし変更が必要な場合は変更が必要なことをしらせてください。
 
-**Next.js Server Components and Client-Side Hooks:**
+# Next.js 15 のアプリケーションの構成
 
-When using client-side hooks (e.g., `useState`, `useEffect`, `useParams`) within a component treated as a Server Component by Next.js, **always** include the `"use client"` directive at the top of the file. Use `const params = useParams();` to receive parameters in the client component.
-Does not use useRouter.
+## クライアントサイド(src/app配下)
 
-**SQLite Database Interaction:**
+- クライアントサイドでつかわれるHook（例：useState、useEffect、useParams）を使う場合は
+必ず "use client"; ディレクティブをファイルの冒頭に追加すること。
+- ルートパラメータを受け取る際は、const params = useParams(); を使用すること。 useRouter は使用しない。
+- テーブルをメンテナンスする画面は初期表示は一覧を表示。さらに新規追加、編集、削除をできるようにすること
 
-All SQLite database operations **must** be handled server-side. Do **not** use the `sql.js` library.
+## サーバーサイド(src/lib配下)
 
-- The SQLite instance is accessible via `openDB` in `src/lib/db.ts`. **Do not modify this file.**
-- To create, modify, or delete database tables, update the `initDB` function in `src/lib/db-init.ts`.
+### SQLiteデータベースの操作
 
-**CRUD Operations:**
+- sql.js ライブラリは使用しないこと。
+- SQLiteのデータベース操作はすべてサーバーコンポネントで行うこと。
+- SQLiteのインスタンスは src/lib/db.ts の openDB 経由でアクセスし、src/lib/db.ts は変更しないこと。
+- テーブルを作成、変更、削除する場合は、src/lib/db-init.ts の initDB 関数を更新すること。
 
-For CRUD (Create, Read, Update, Delete, Select) operations on a specific table, create corresponding files under `src/lib/$table.ts`.
+### SQLiteテーブルの操作
 
-- `$table.ts` files **must** include the `"use server"` directive at the top.
-- Server actions in `$table.ts` **do not** need to return a value, _except_ for `getXxx` functions. `getXxx` functions are used to retrieve data _after_ a database update. All other CRUD operations should not return anything.
-- Ensure that when calling openDb(), it is always closed in the finally block. Additionally, if an error occurs, log the error to the console
+- SQLiteのテーブル操作はすべてサーバーコンポネントで行うこと。
+- テーブルに対する操作を行う場合はテーブルごとに src/lib/$テーブル.ts にファイルを作成し
+"use server";
+import { openDB } from './db';
+ではじめて、そのあとにメソッドを追加すること。
+- openDb() を呼び出す際は、必ずfinallyブロックでデータベースを閉じること。
+- SELECTを行うメソッド以外のメソッド(追加、更新、削除y)では戻り値は不要。
